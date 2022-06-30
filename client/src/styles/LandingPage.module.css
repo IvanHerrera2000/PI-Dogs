@@ -24,6 +24,7 @@
   width: 150px;
   transition: all 0.5s;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .title {

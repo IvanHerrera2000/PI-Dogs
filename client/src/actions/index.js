@@ -10,3 +10,13 @@ export function getDogs() {
     });
   };
 }
+
+export function getTemperaments() {
+  return async function (dispatch) {
+    var temp = await axios.get('http://localhost:3001/temperament');
+    return dispatch({
+      type: 'GET_TEMPERAMENTS',
+      payload: temp.data,
+    });
+  };
+}

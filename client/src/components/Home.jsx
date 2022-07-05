@@ -3,12 +3,23 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDogs, getTemperaments } from '../actions';
 import Card from './Card';
+import Paginated from './Paginated';
 
 function Home() {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.dogs);
   const allTemperaments = useSelector((state) => state.temperaments);
-  console.log(allDogs);
+
+  //Paginated
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dogsPerPage, setDogsPerPage] = useState(8);
+  const indexOfLastDog = currentPage * dogsPerPage;
+  const indexOfFirstDog = indexOfLastDog - dogsPerPage;
+  const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog);
+
+  const paginated = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     dispatch(getDogs());
@@ -74,8 +85,15 @@ function Home() {
         </select>
       </div>
 
+      {/* Paginated rendering */}
+      <Paginated
+        dogsPerPage={dogsPerPage}
+        allDogs={allDogs.length}
+        paginated={paginated}
+      />
+
       {/* Dogs rendering */}
-      {!allDogs.length > 0 ? (
+      {!currentDogs.length > 0 ? (
         <div>
           <p>Loading...</p>
           <img
@@ -85,7 +103,7 @@ function Home() {
           />
         </div>
       ) : (
-        allDogs.map((element) => {
+        currentDogs.map((element) => {
           return (
             <div key={element.id}>
               <Link to={`/home/${element.id}`}>

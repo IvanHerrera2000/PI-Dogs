@@ -46,6 +46,46 @@ function rootReducer(state = initialState, action) {
         dogs: temperamentsFilter,
       };
 
+    case 'ORDER_ALPHABETICAL':
+      let sortAlphabetical =
+        action.payload === 'upward'
+          ? state.dogs.sort(function (a, b) {
+              if (a.name > b.name) {
+                return 1;
+              }
+              if (b.name > a.name) {
+                return -1;
+              }
+              return 0;
+            })
+          : state.dogs.sort(function (a, b) {
+              if (a.name > b.name) {
+                return -1;
+              }
+              if (b.name > a.name) {
+                return 1;
+              }
+              return 0;
+            });
+      return {
+        ...state,
+        dogs: sortAlphabetical,
+      };
+
+    case 'ORDER_BY_WEIGHT':
+      let sortWeight =
+        action.payload === 'weightUpward'
+          ? state.dogs.sort(function (a, b) {
+              return b.weight_min - a.weight_min;
+            })
+          : state.dogs.sort(function (a, b) {
+              return a.weight_min - b.weight_min;
+            });
+      return {
+        ...state,
+        dogs: sortWeight,
+      };
+
     default:
       return { ...state };
   }

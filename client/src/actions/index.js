@@ -35,3 +35,18 @@ export function filterTemperament(payload) {
     payload,
   };
 }
+
+//SORTS
+export function orderAlphabetical(payload) {
+  return {
+    type: 'ORDER_ALPHABETICAL',
+    payload,
+  };
+}
+
+export function orderByWeight(payload) {
+  return {
+    type: 'ORDER_BY_WEIGHT',
+    payload,
+  };
+}

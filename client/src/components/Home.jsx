@@ -6,6 +6,8 @@ import {
   getTemperaments,
   filterCreated,
   filterTemperament,
+  orderAlphabetical,
+  orderByWeight,
 } from '../actions';
 import Card from './Card';
 import Paginated from './Paginated';
@@ -33,6 +35,7 @@ function Home() {
     dispatch(getTemperaments());
   }, [dispatch]);
 
+  //Reload dogs
   function handleClick(e) {
     e.preventDefault();
     dispatch(getDogs());
@@ -53,6 +56,21 @@ function Home() {
     setOrder(e.target.value);
   }
 
+  //Sorts
+  function handleSort(e) {
+    e.preventDefault();
+    dispatch(orderAlphabetical(e.target.value));
+    setCurrentPage(1);
+    setOrder(e.target.value);
+  }
+
+  function handleSortWeight(e) {
+    e.preventDefault();
+    dispatch(orderByWeight(e.target.value));
+    setCurrentPage(1);
+    setOrder(e.target.value);
+  }
+
   return (
     <div>
       <h1>DOGS</h1>
@@ -66,7 +84,7 @@ function Home() {
       </button>
       <div>
         {/* Alphabetical order */}
-        <select defaultValue={'DEFAULT'}>
+        <select defaultValue={'DEFAULT'} onChange={(e) => handleSort(e)}>
           <option value="DEFAULT" disabled>
             Alphabetical order
           </option>
@@ -75,7 +93,7 @@ function Home() {
         </select>
 
         {/* Order by weight */}
-        <select defaultValue={'DEFAULT'}>
+        <select defaultValue={'DEFAULT'} onChange={(e) => handleSortWeight(e)}>
           <option value="DEFAULT" disabled>
             Order by weight
           </option>

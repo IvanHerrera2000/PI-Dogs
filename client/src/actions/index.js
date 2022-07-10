@@ -20,3 +20,18 @@ export function getTemperaments() {
     });
   };
 }
+
+//FILTERS
+export function filterCreated(payload) {
+  return {
+    type: 'FILTER_CREATED',
+    payload,
+  };
+}
+
+export function filterTemperament(payload) {
+  return {
+    type: 'FILTER_TEMPERAMENT',
+    payload,
+  };
+}

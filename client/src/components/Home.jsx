@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDogs, getTemperaments } from '../actions';
+import {
+  getDogs,
+  getTemperaments,
+  filterCreated,
+  filterTemperament,
+} from '../actions';
 import Card from './Card';
 import Paginated from './Paginated';
 
 function Home() {
   const dispatch = useDispatch();
+  const [order, setOrder] = useState('');
+
   const allDogs = useSelector((state) => state.dogs);
   const allTemperaments = useSelector((state) => state.temperaments);
 
@@ -29,6 +36,21 @@ function Home() {
   function handleClick(e) {
     e.preventDefault();
     dispatch(getDogs());
+  }
+
+  //Filters
+  function handleFilterCreated(e) {
+    e.preventDefault(e);
+    dispatch(filterCreated(e.target.value));
+    setCurrentPage(1);
+    setOrder(e.target.value);
+  }
+
+  function handleFilterByTemperament(e) {
+    e.preventDefault(e);
+    dispatch(filterTemperament(e.target.value));
+    setCurrentPage(1);
+    setOrder(e.target.value);
   }
 
   return (
@@ -62,7 +84,10 @@ function Home() {
         </select>
 
         {/* Filter by temperament */}
-        <select defaultValue={'DEFAULT'}>
+        <select
+          defaultValue={'DEFAULT'}
+          onChange={(e) => handleFilterByTemperament(e)}
+        >
           <option value="DEFAULT" disabled>
             Filter by temperament
           </option>
@@ -75,7 +100,10 @@ function Home() {
         </select>
 
         {/* Filter by create */}
-        <select defaultValue={'DEFAULT'}>
+        <select
+          defaultValue={'DEFAULT'}
+          onChange={(e) => handleFilterCreated(e)}
+        >
           <option value="DEFAULT" disabled>
             Filter by create
           </option>

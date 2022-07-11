@@ -28,7 +28,7 @@ function SearchBar() {
           value={search}
           onChange={handleInputChange}
         ></input>
-        <input type="submit">Search</input>
+        <button type="submit">Search</button>
       </form>
     </div>
   );

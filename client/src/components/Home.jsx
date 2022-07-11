@@ -11,6 +11,7 @@ import {
 } from '../actions';
 import Card from './Card';
 import Paginated from './Paginated';
+import NavBar from './NavBar';
 
 function Home() {
   const dispatch = useDispatch();
@@ -73,8 +74,8 @@ function Home() {
 
   return (
     <div>
+      <NavBar />
       <h1>DOGS</h1>
-      <Link to="/dogs">Create Dog</Link>
       <button
         onClick={(e) => {
           handleClick(e);

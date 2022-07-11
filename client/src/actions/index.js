@@ -25,7 +25,7 @@ export function getTemperaments() {
 export function searchDogs(search) {
   return function (dispatch) {
     axios
-      .get(`http://localhost:3001/dogs?name='${search}`)
+      .get(`http://localhost:3001/dogs?name=${search}`)
       .then((dogs) => {
         dispatch({
           type: 'SEARCH_DOGS',

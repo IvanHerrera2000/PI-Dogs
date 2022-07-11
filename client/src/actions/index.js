@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// renderiza los dogs en el home
+//GETS
 export function getDogs() {
   return async function (dispatch) {
     var json = await axios.get('http://localhost:3001/dogs');
@@ -18,6 +18,24 @@ export function getTemperaments() {
       type: 'GET_TEMPERAMENTS',
       payload: temp.data,
     });
+  };
+}
+
+//SEARCH
+export function searchDogs(search) {
+  return function (dispatch) {
+    axios
+      .get(`http://localhost:3001/dogs?name='${search}`)
+      .then((dogs) => {
+        dispatch({
+          type: 'SEARCH_DOGS',
+          payload: dogs.data,
+        });
+      })
+
+      .catch(() => {
+        alert('Doggie not found!');
+      });
   };
 }
 

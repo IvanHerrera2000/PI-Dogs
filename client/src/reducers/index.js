@@ -20,6 +20,12 @@ function rootReducer(state = initialState, action) {
         temperaments: action.payload,
       };
 
+    case 'SEARCH_DOGS':
+      return {
+        ...state,
+        dogs: action.payload,
+      };
+
     case 'FILTER_CREATED':
       const allDogsCreated = state.allDogs;
       const createdFilter =

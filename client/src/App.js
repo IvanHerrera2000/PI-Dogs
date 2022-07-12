@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import About from './components/About';
 import DogCreate from './components/DogCreate';
 import DogDetail from './components/DogDetail';
 import Home from './components/Home';
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route exact path="/home/:id">
           <DogDetail />
+        </Route>
+        <Route exact path="/about">
+          <About />
         </Route>
       </Switch>
     </BrowserRouter>

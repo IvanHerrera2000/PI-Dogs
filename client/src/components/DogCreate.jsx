@@ -4,71 +4,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { postDog, getTemperaments } from '../actions';
 import styles from '../styles/DogCreate.module.css';
 
-//VALIDACION DE ERRORES EN LOS INPUTS
-
-function validate(input) {
-  let errors = {};
-
-  if (!input.name || !/^[A-Z]+[A-Za-z0-9\s]+$/g.test(input.name)) {
-    errors.name = '❌ The first letter must be uppercase';
-  } else {
-    errors.name = '✅Done!';
-  }
-
-  if (!input.height_min || !/^[1-9]\d*(\.\d+)?$/.test(input.height_min)) {
-    errors.height_min = '❌ Only numbers';
-  } else {
-    errors.height_min = '✅Done!';
-  }
-
-  if (!input.height_max || !/^[1-9]\d*(\.\d+)?$/.test(input.height_max)) {
-    errors.height_max = '❌ Only numbers';
-  } else {
-    errors.height_max = '✅Done!';
-  }
-
-  if (input.height_max <= input.height_min) {
-    errors.height_min = '❌ Min value cannot be greater than the max';
-  }
-
-  if (!input.weight_min || !/^[1-9]\d*(\.\d+)?$/.test(input.weight_min)) {
-    errors.weight_min = '❌ Only numbers';
-  }
-
-  if (!input.weight_max || !/^[1-9]\d*(\.\d+)?$/.test(input.weight_max)) {
-    errors.weight_max = '❌ Only numbers';
-  }
-
-  if (input.weight_max <= input.weight_min) {
-    errors.weight_min = '❌ Min value cannot be greater than the max';
-  }
-
-  if (!input.life_time_min || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_min)) {
-    errors.life_time_min = '❌ Only numbers';
-  }
-
-  if (!input.life_time_max || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_max)) {
-    errors.life_time_max = '❌ Only numbers';
-  }
-
-  if (input.life_time_max <= input.life_time_min) {
-    errors.life_time_min = '❌ Min value cannot be greater than the max';
-  }
-
-  if (
-    input.img &&
-    !/[a-z0-9-.]+\.[a-z]{2,4}\/?([^\s<>#%",{}\\|^[\]`]+)?$/.test(input.img)
-  ) {
-    errors.img = '❌ Must be an URL or be empty';
-  }
-
-  if (input.temperament.length <= 2) {
-    errors.temperament = "❌ The dog can't have more than three temperaments!";
-  }
-
-  return errors;
-}
-
 function DogCreate() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -87,18 +22,61 @@ function DogCreate() {
     img: '',
   });
 
-  function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
+  //VALIDACION DE ERRORES EN LOS INPUTS
+  const validate = function (input) {
+    const error = {};
+    if (!input.name) {
+      error.name = 'Name is required';
+    }
+    if (!input.height_min) {
+      error.height_min = 'Height Min is required';
+    }
+    if (input.height_min < 0) {
+      error.height_min = 'Height Min must be greater than 0';
+    }
+    if (!input.height_max) {
+      error.height_max = 'Height Max is required';
+    }
+    if (!input.weight_min) {
+      error.weight_min = 'Weight Min is required';
+    }
+    if (input.weight_min < 0) {
+      error.weight_min = 'Weight Min must be greater than 0';
+    }
+    if (!input.weight_max) {
+      error.weight_max = 'Height Max is required';
+    }
+    if (!input.life_time_max) {
+      error.weight_max = 'Life Time Max is required';
+    }
+    if (!input.life_time_min) {
+      error.weight_max = 'Life Time Min is required';
+    }
 
-    setErrors(
-      validate({
+    if (Number(input.height_max) < Number(input.height_min)) {
+      error.height_max = 'Height Min must be less than Height Max';
+    }
+    if (Number(input.weight_min) > Number(input.weight_max)) {
+      error.weight_min = 'Weight Min must be less than Weight Max';
+    }
+    if (Number(input.life_time_min) > Number(input.life_time_max)) {
+      error.weight_min = 'Life Time Min must be less than Life Time Max';
+    }
+
+    return error;
+  };
+
+  function handleChange(e) {
+    e.preventDefault();
+    setInput((input) => {
+      const newInput = {
         ...input,
-        [e.target.name]: e.target.name,
-      })
-    );
+        [e.target.name]: e.target.value,
+      };
+      const error = validate(newInput);
+      setErrors(error);
+      return newInput;
+    });
   }
 
   function handleSelect(e) {
@@ -309,7 +287,12 @@ function DogCreate() {
           </ul>
         </div>
 
-        <button type="submit">Create!</button>
+        <button
+          type="submit"
+          disabled={Object.keys(errors).length > 0 ? true : false}
+        >
+          Create Dog
+        </button>
       </form>
       <div>
         {errors.name && <p>{errors.name}</p>}

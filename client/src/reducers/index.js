@@ -20,6 +20,12 @@ function rootReducer(state = initialState, action) {
         temperaments: action.payload,
       };
 
+    case 'GET_DETAILS':
+      return {
+        ...state,
+        detail: action.payload,
+      };
+
     case 'SEARCH_DOGS':
       return {
         ...state,

@@ -26,6 +26,11 @@ function rootReducer(state = initialState, action) {
         dogs: action.payload,
       };
 
+    case 'POST_DOG':
+      return {
+        ...state,
+      };
+
     case 'FILTER_CREATED':
       const allDogsCreated = state.allDogs;
       const createdFilter =

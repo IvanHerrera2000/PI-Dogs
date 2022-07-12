@@ -75,7 +75,6 @@ function Home() {
   return (
     <div>
       <NavBar />
-      <h1>DOGS</h1>
       <button
         onClick={(e) => {
           handleClick(e);

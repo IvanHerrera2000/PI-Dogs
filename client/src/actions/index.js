@@ -21,6 +21,14 @@ export function getTemperaments() {
   };
 }
 
+//POST
+export function postDog(payload) {
+  return async function (dispatch) {
+    const response = await axios.post('http://localhost:3001/dog', payload);
+    return response;
+  };
+}
+
 //SEARCH
 export function searchDogs(search) {
   return function (dispatch) {

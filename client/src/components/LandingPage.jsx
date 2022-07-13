@@ -8,7 +8,7 @@ function LandingPage() {
       <div className={styles.container}>
         <h1 className={styles.title}>Woof Woof?</h1>
         <Link to="/home">
-          <button className={styles.btn}>WOOF!</button>
+          <button>WOOF!</button>
         </Link>
       </div>
     </div>

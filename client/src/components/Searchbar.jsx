@@ -20,15 +20,17 @@ function SearchBar() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.inputContainer}>
         <input
           type="text"
           placeholder="Search dog..."
           value={search}
           onChange={handleInputChange}
         ></input>
-        <button type="submit">Search</button>
+        <button type="submit" className={styles.btn}>
+          Search
+        </button>
       </form>
     </div>
   );

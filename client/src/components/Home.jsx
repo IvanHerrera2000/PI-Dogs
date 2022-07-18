@@ -12,6 +12,7 @@ import {
 import Card from './Card';
 import Paginated from './Paginated';
 import NavBar from './NavBar';
+import styles from '../styles/Home.module.css';
 
 function Home() {
   const dispatch = useDispatch();
@@ -73,15 +74,8 @@ function Home() {
   }
 
   return (
-    <div>
+    <>
       <NavBar />
-      <button
-        onClick={(e) => {
-          handleClick(e);
-        }}
-      >
-        Reload doggies
-      </button>
       <div>
         {/* Alphabetical order */}
         <select defaultValue={'DEFAULT'} onChange={(e) => handleSort(e)}>
@@ -131,6 +125,14 @@ function Home() {
         </select>
       </div>
 
+      <button
+        onClick={(e) => {
+          handleClick(e);
+        }}
+      >
+        Reload doggies
+      </button>
+
       {/* Paginated rendering */}
       <Paginated
         dogsPerPage={dogsPerPage}
@@ -138,37 +140,39 @@ function Home() {
         paginated={paginated}
       />
 
-      {/* Dogs rendering */}
-      {!currentDogs.length > 0 ? (
-        <div>
-          <p>Loading...</p>
-          <img
-            src={
-              'https://i0.wp.com/thumbs.gfycat.com/ThankfulPlushAtlanticspadefish-max-1mb.gif'
-            }
-          />
-        </div>
-      ) : (
-        currentDogs.map((element) => {
-          return (
-            <div key={element.id}>
-              <Link to={`/home/${element.id}`}>
-                <Card
-                  name={element.name}
-                  img={
-                    element.image
-                      ? element.image
-                      : 'https://pm1.narvii.com/6893/724dede9a107e0d420269799b4efe8be26a88df9r1-842-1024v2_00.jpg'
-                  }
-                  weight_max={element.weight_max}
-                  weight_min={element.weight_min}
-                />
-              </Link>
-            </div>
-          );
-        })
-      )}
-    </div>
+      <div className={styles.grid}>
+        {/* Dogs rendering */}
+        {!currentDogs.length > 0 ? (
+          <div className={styles.card}>
+            <p>Loading...</p>
+            <img
+              src={
+                'https://i0.wp.com/thumbs.gfycat.com/ThankfulPlushAtlanticspadefish-max-1mb.gif'
+              }
+            />
+          </div>
+        ) : (
+          currentDogs.map((element) => {
+            return (
+              <div key={element.id} className={styles.card}>
+                <Link to={`/home/${element.id}`}>
+                  <Card
+                    name={element.name}
+                    img={
+                      element.image
+                        ? element.image
+                        : 'https://pm1.narvii.com/6893/724dede9a107e0d420269799b4efe8be26a88df9r1-842-1024v2_00.jpg'
+                    }
+                    weight_max={element.weight_max}
+                    weight_min={element.weight_min}
+                  />
+                </Link>
+              </div>
+            );
+          })
+        )}
+      </div>
+    </>
   );
 }
 

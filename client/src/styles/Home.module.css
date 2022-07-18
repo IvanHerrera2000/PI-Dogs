@@ -1,3 +1,9 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 400px);
@@ -10,4 +16,14 @@
   justify-content: center;
   text-align: center;
   margin: auto;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter {
+  margin: 0.5rem;
 }

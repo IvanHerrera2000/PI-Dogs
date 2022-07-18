@@ -74,11 +74,15 @@ function Home() {
   }
 
   return (
-    <>
+    <div className={styles.container}>
       <NavBar />
-      <div>
+      <div className={styles.filters}>
         {/* Alphabetical order */}
-        <select defaultValue={'DEFAULT'} onChange={(e) => handleSort(e)}>
+        <select
+          defaultValue={'DEFAULT'}
+          onChange={(e) => handleSort(e)}
+          className={styles.filter}
+        >
           <option value="DEFAULT" disabled>
             Alphabetical order
           </option>
@@ -87,7 +91,11 @@ function Home() {
         </select>
 
         {/* Order by weight */}
-        <select defaultValue={'DEFAULT'} onChange={(e) => handleSortWeight(e)}>
+        <select
+          defaultValue={'DEFAULT'}
+          onChange={(e) => handleSortWeight(e)}
+          className={styles.filter}
+        >
           <option value="DEFAULT" disabled>
             Order by weight
           </option>
@@ -99,6 +107,7 @@ function Home() {
         <select
           defaultValue={'DEFAULT'}
           onChange={(e) => handleFilterByTemperament(e)}
+          className={styles.filter}
         >
           <option value="DEFAULT" disabled>
             Filter by temperament
@@ -115,6 +124,7 @@ function Home() {
         <select
           defaultValue={'DEFAULT'}
           onChange={(e) => handleFilterCreated(e)}
+          className={styles.filter}
         >
           <option value="DEFAULT" disabled>
             Filter by create
@@ -125,13 +135,15 @@ function Home() {
         </select>
       </div>
 
-      <button
-        onClick={(e) => {
-          handleClick(e);
-        }}
-      >
-        Reload doggies
-      </button>
+      <div className={styles.btn}>
+        <button
+          onClick={(e) => {
+            handleClick(e);
+          }}
+        >
+          Reload doggies
+        </button>
+      </div>
 
       {/* Paginated rendering */}
       <Paginated
@@ -172,7 +184,7 @@ function Home() {
           })
         )}
       </div>
-    </>
+    </div>
   );
 }
 

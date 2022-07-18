@@ -9,11 +9,11 @@ function Paginated({ dogsPerPage, allDogs, paginated }) {
   }
 
   return (
-    <nav>
-      <ul>
+    <nav className={styles.nav}>
+      <ul className={styles.container}>
         {pageNumbers &&
           pageNumbers.map((number) => (
-            <li key={number}>
+            <li key={number} className={styles.number}>
               <a onClick={() => paginated(number)}>{number}</a>
             </li>
           ))}

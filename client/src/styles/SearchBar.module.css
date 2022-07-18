@@ -5,7 +5,6 @@
 }
 
 .inputContainer input {
-  background-color: rgb(223, 223, 223);
   border: none;
   padding: 0.65rem;
   font-size: 1rem;
@@ -20,7 +19,6 @@
 }
 
 .btn {
-  background-color: #e8e8e8;
   border: none;
   color: black;
   padding: 0.65rem;
@@ -32,7 +30,5 @@
 }
 
 .btn:hover {
-  background-color: black;
-  color: #e8e8e8;
   transform: scale(1.1);
 }

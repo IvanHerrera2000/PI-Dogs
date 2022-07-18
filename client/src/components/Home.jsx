@@ -137,6 +137,7 @@ function Home() {
 
       <div className={styles.btn}>
         <button
+          className={styles.button}
           onClick={(e) => {
             handleClick(e);
           }}

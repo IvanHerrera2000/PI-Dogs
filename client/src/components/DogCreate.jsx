@@ -133,18 +133,19 @@ function DogCreate() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <Link to="/home">
-        <button> Back to home</button>
+        <button className={styles.button}> Back to home</button>
       </Link>
       <h1>Create a new dog!</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <p>* : Required</p>
         {/*INPUTS*/}
         {/*Breed*/}
         <div>
-          <label>*Breed:</label>
+          <label className={styles.label}>*Breed:</label>
           <input
+            className={styles.input}
             type="text"
             value={input.name}
             name="name"
@@ -155,11 +156,12 @@ function DogCreate() {
           />
           {/*Size*/}
           <div>
-            <label>*Size:</label>
+            <label className={styles.label}>*Size:</label>
             <br />
             <div>
               <div>
                 <input
+                  className={styles.input}
                   type="number"
                   min="1"
                   max="100"
@@ -174,6 +176,7 @@ function DogCreate() {
               </div>
               <div>
                 <input
+                  className={styles.input}
                   type="number"
                   min="1"
                   max="100"
@@ -190,11 +193,12 @@ function DogCreate() {
           </div>
           {/*Weight*/}
           <div>
-            <label>*Weight:</label>
+            <label className={styles.label}>*Weight:</label>
             <br />
             <div>
               <div>
                 <input
+                  className={styles.input}
                   type="number"
                   min="1"
                   max="100"
@@ -209,6 +213,7 @@ function DogCreate() {
               </div>
               <div>
                 <input
+                  className={styles.input}
                   type="number"
                   min="1"
                   max="100"
@@ -225,11 +230,12 @@ function DogCreate() {
           </div>
           {/*Lifespan*/}
           <div>
-            <label>*Lifespan:</label>
+            <label className={styles.label}>*Lifespan:</label>
             <br />
             <div>
               <div>
                 <input
+                  className={styles.input}
                   min="1"
                   max="100"
                   type="number"
@@ -244,6 +250,7 @@ function DogCreate() {
               </div>
               <div>
                 <input
+                  className={styles.input}
                   min="1"
                   max="100"
                   type="number"
@@ -259,8 +266,9 @@ function DogCreate() {
             </div>
           </div>
           {/*Image*/}
-          <label>Image:</label>
+          <label className={styles.label}>Image:</label>
           <input
+            className={styles.input}
             type="imagen"
             value={input.image}
             name="image"
@@ -268,8 +276,8 @@ function DogCreate() {
             onChange={(e) => handleChange(e)}
           />
           {/*Temperaments*/}
-          <label>*Temperaments:</label>
-          <select onChange={(e) => handleSelect(e)}>
+          <label className={styles.label}>*Temperaments:</label>
+          <select onChange={(e) => handleSelect(e)} className={styles.select}>
             {temperaments.map((temperament) => (
               <option value={temperament.name} key={temperament.id}>
                 {temperament.name}
@@ -279,20 +287,26 @@ function DogCreate() {
           <ul>
             <li>
               {input.temperament.map((element) => (
-                <button key={element} onClick={() => handleDelete(element)}>
+                <button
+                  className={styles.btnTemperaments}
+                  key={element}
+                  onClick={() => handleDelete(element)}
+                >
                   {element}
                 </button>
               ))}
             </li>
           </ul>
         </div>
-
-        <button
-          type="submit"
-          disabled={Object.keys(errors).length > 0 ? true : false}
-        >
-          Create Dog
-        </button>
+        <div className={styles.btn}>
+          <button
+            className={styles.button}
+            type="submit"
+            disabled={Object.keys(errors).length > 0 ? true : false}
+          >
+            Create Dog
+          </button>
+        </div>
       </form>
       <div>
         {errors.name && <p>{errors.name}</p>}
